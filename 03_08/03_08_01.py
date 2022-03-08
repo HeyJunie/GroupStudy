@@ -9,9 +9,13 @@
 
 import sys
 
+# 유치원에 있는 원생 수와 나누려고 하는 조의 개수
 n, k = map(int, sys.stdin.readline().split())
+# 입력받은 아이들의 키
 kids = list(map(int, sys.stdin.readline().split()))
 
+# 아이들의 키 차이 초기화하고,
+# 키 차이를 최소화 하기 위해 차이를 정렬함
 diff = []
 for i in range(n-1) :
     diff.append(kids[i+1] - kids[i])
