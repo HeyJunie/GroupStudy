@@ -11,4 +11,21 @@
 # 만약 이동한 칸에 사과가 있다면, 그 칸에 있던 사과가 없어지고 꼬리는 움직이지 않는다.
 # 만약 이동한 칸에 사과가 없다면, 몸길이를 줄여서 꼬리가 위치한 칸을 비워준다. 즉, 몸길이는 변하지 않는다.
 # 사과의 위치와 뱀의 이동경로가 주어질 때 이 게임이 몇 초에 끝나는지 계산하라.
+import sys
 
+# 보드 크기 입력
+n = int(sys.stdin.readline())
+# n*n 크기의 보드
+board = [([0]*n) for i in range(n)]
+# print(board)
+# 사과의 개수
+k = int(sys.stdin.readline())
+# 사과 위치 저장
+for apple in range(k):
+    row, column = list(map(int, sys.stdin.readline().split()))
+    board[row - 1][column - 1] = 1
+# print(board)
+
+# 뱀의 방향 변환 횟수 입력
+l = int(sys.stdin.readline())
+# 뱀의 방향 정보 입력 받기
