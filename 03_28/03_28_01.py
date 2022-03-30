@@ -40,7 +40,7 @@ for _ in range(t):
     p= p.replace('RR', '')
     # 배열의 갯수
     n = int(input())
-    # n개의 배열
+    # n개의 배열 (문자열로 받아서 정수 뽑아내고, 그걸 리스트에 넣어서 함수에 보냄)
     input_arr = input()
     tmp_input_arr = re.findall(r'\d', input_arr)
     case_arr = list(map(int, tmp_input_arr))
