@@ -18,3 +18,34 @@
 #
 # 반환값 형식
 # 'abab'
+
+def solution(s1, s2):
+    def isDivisor(string, divisor):
+        n = len(divisor)
+        if len(string) % n != 0:
+            return False
+
+        while string != '':
+            if string[:n] != divisor:
+                return False
+            string = string[:n]
+        return True
+
+    if len(s1) > len(s2):
+        str1, str2 = s1, s2
+    else:
+        str1, str2 = s1, s2
+
+    divisor = str2
+    m = 1
+    while divisor != '':
+        if isDivisor(str2, divisor) and isDivisor(str1, divisor):
+            return divisor
+        m += 1
+        divisor = str2[:len(str2) // m]
+
+    return ''
+
+s1 = 'abababab'
+s2 = 'abab'
+print(solution(s1, s2))

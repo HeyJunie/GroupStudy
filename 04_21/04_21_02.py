@@ -36,22 +36,38 @@
 #
 
 
-import re
+# import re
+# def solution(address_book):
+#     address_list = []
+#     count = {}
+#     for i in range(len(address_book)):
+#         address= re.split(r'-', address_book[i][1])
+#         address = "".join(address)
+#         address_list.append(address)
+#
+#     for i in address_list:
+#         try: count[i] += 1
+#         except: count[i] = 1
+#
+#     answer = count[i]
+#     return answer
+
 def solution(address_book):
-    address_list = []
-    count = {}
-    for i in range(len(address_book)):
-        address= re.split(r'-', address_book[i][1])
-        address = "".join(address)
-        address_list.append(address)
+    book = {}
+    for name, number in address_book:
+        number = number.replace('-', '').replace(' ', '')
+        if name not in book:
+            book[name] = set()
+        book[name].add(number)
 
-    for i in address_list:
-        try: count[i] += 1
-        except: count[i]=1
+    answer = 0
+    for name in book:
+        num = len(book[name])
+        if num > 1:
+            answer += num
 
-    answer = count[i]
     return answer
 
-address_book = [['kim', '012-423-0044'], ['park', '042-512-4555'], ['choi', '555-523'], ['kim', '444-524'], ['kim', '0124230044']]
-print(len(address_book))
+address_book = [['kim', '012-423-0042'], ['park', '042-512-4555'], ['choi', '555-523'], ['kim', '444-524'], ['kim', '0124230044']]
+# print(len(address_book))
 print(solution(address_book))

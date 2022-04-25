@@ -24,7 +24,11 @@ def solution(nums):
     for i in range(len(nums)):
         for j in range(len(nums)):
             if num_list[0] == nums[i] and num_list[1] == nums[j]:
-                answer = j-i+1
+                if i > j:
+                    answer = i-j+1
+                else:
+                    answer = j-i+1
+
     return answer
 
 nums = [4, 6, 8, 1, 0, 9, 3, 4, 7, 3]

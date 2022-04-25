@@ -20,21 +20,35 @@
 # 출력 예시
 # 2
 
+# def solution(nums):
+#     n = len(nums)
+#     sum_num = []
+#     len_list = []
+#     list_set = [[nums[k] for k in range(n) if i&1<<k] for i in range(2**n)]
+#     for i in range(len(list_set)):
+#         sum_num.append(sum(list_set[i]))
+#
+#         if sum_num[i] == 0 and len(list_set[i]) > 0:
+#             len_list.append(list_set[i])
+#             answer = len(len_list[0])
+#         elif sum_num[i] != 0 and len(list_set[i]) > 5:
+#             answer = -1
+#     return answer
+
+
+from itertools import combinations
+
 def solution(nums):
     n = len(nums)
-    sum_num = []
-    len_list = []
-    list_set = [[nums[k] for k in range(n) if i&1<<k] for i in range(2**n)]
-    for i in range(len(list_set)):
-        sum_num.append(sum(list_set[i]))
+    for i in range(1, 5):
+        for indices in combinations(range(n), i):
+            summation = 0
+            for index in indices:
+                summation += nums[index]
+                if summation == 0:
+                    return i
+    return -1
 
-        if sum_num[i] == 0 and len(list_set[i]) > 0:
-            len_list.append(list_set[i])
-            answer = len(len_list[0])
-        elif sum_num[i] != 0 and len(list_set[i]) > 5:
-            answer = -1
-    return answer
-
-
-nums = [-5, -2, 4, 5, 7]
+nums = [-5, -2, 4, 3, 8]
 print(solution(nums))
+
