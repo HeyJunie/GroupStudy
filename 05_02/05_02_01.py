@@ -16,17 +16,22 @@ from collections import deque
 
 # dfs 함수
 def dfs(v):
+    # 방문한 곳에 1을 삽입
     visited1[v] = 1
     print(v, end=' ')
+    # 재귀 함수 선언
     for i in range(1, n + 1):
         if visited1[i] == 0 and matrix[v][i] == 1:
             dfs(i)
 
 # bfs 함수
 def bfs(v):
+    # 방문할 곳을 넣을 덱
     deq = deque()
     deq.append(v)
+    # 방문한 곳에 1을 삽입
     visited2[v] = 1
+    # 덱 안에 데이터가 없어질때까지 반복문 실행
     while deq:
         v = deq.popleft()
         print(v, end=' ')
@@ -48,6 +53,7 @@ visited2 = [0] * (n + 1)
 # 간선 갯수에 맞춰 두 개의 숫자들 입력 받기
 for _ in range(m):
     a, b = map(int, sys.stdin.readline().rstrip().split())
+    # 입력 받은 두 값의 위치 체크를 위해 위치에 맞게 1 삽입
     matrix[a][b] = matrix[b][a] = 1
 
 dfs(v)
