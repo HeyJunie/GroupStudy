@@ -21,19 +21,54 @@
 # 출력
 # 1번 컴퓨터가 웜 바이러스에 걸렸을 때, 1번 컴퓨터를 통해 웜 바이러스에 걸리게 되는 컴퓨터의 수를 첫째 줄에 출력한다.
 import sys
+from collections import deque
 
-# 바이러스에 걸린 컴퓨터수 셀 리스트
+# # 바이러스에 걸린 컴퓨터수 셀 리스트
+# count = []
+# def dfs(v):
+#     # 방문했던 곳에 1 삽입
+#     visited[v] = 1
+#     #재귀 함수 선언
+#     for i in range(1, n + 1):
+#         if visited[i] == 0 and matrix[v][i] == 1:
+#             # 리스트에 해당하는 값을 따로 담아줌
+#             count.append(i)
+#             dfs(i)
+#     # 그 값의 길이를 리턴
+#     return len(count)
+#
+# # 컴퓨터수 n, 네트워크상 연결된 컴퓨터쌍 수 m
+# n = int(sys.stdin.readline())
+# m = int(sys.stdin.readline())
+# # 컴퓨터의 번호쌍을 2차원 배열로 받기
+# matrix = [[0] * (n + 1) for _ in range(n + 1)]
+# # 방문했던 곳 확인을 위한 배열
+# visited = [0] * (n + 1)
+#
+# # 간선 갯수 확인을 위한 반복문
+# for i in range(m):
+#     a, b = map(int, sys.stdin.readline().split())
+#     matrix[a][b] = matrix[b][a] = 1
+#
+# # 값의 길이를 출력
+# print(dfs(1))
+
+# bfs 함수
 count = []
-def dfs(v):
-    # 방문했던 곳에 1 삽입
+def bfs(v):
+    # 방문할 곳을 넣을 덱
+    deq = deque()
+    deq.append(v)
+    # 방문한 곳에 1을 삽입
     visited[v] = 1
-    #재귀 함수 선언
-    for i in range(1, n + 1):
-        if visited[i] == 0 and matrix[v][i] == 1:
-            # 리스트에 해당하는 값을 따로 담아줌
-            count.append(i)
-            dfs(i)
-    # 그 값의 길이를 리턴
+    # 덱 안에 데이터가 없어질때까지 반복문 실행
+    while deq:
+        v = deq.popleft()
+        for i in range(1, n + 1):
+            if visited[i] == 0 and matrix[v][i] == 1:
+                deq.append(i)
+                count.append(i)
+                visited[i] = 1
     return len(count)
 
 # 컴퓨터수 n, 네트워크상 연결된 컴퓨터쌍 수 m
@@ -49,5 +84,4 @@ for i in range(m):
     a, b = map(int, sys.stdin.readline().split())
     matrix[a][b] = matrix[b][a] = 1
 
-# 값의 길이를 출력
-print(dfs(1))
+print(bfs(1))
