@@ -32,21 +32,69 @@ import sys
 # 재귀를 하다 에러가 난다면 아래와 같은 코드를 사용해서 해결한다.
 sys.setrecursionlimit(10 ** 6)
 
-def dfs(x, y):
+# def dfs(x, y):
+#     # 상좌하우의 방향
+#     dx = [0, -1, 0, 1]
+#     dy = [1, 0, -1, 0]
+#
+#     # 방향 탐색
+#     for i in range(4):
+#         nx = x + dx[i]
+#         ny = y + dy[i]
+#         if (0 <= nx < m) and (0 <= ny < n):
+#             if matrix[ny][nx] == 1:
+#                 # 상하좌우에 값이 있으면 값을 0으로 변경한다.
+#                 matrix[ny][nx] = 0
+#                 dfs(nx, ny)
+#     return
+#
+# # 테스트 케이스
+# t = int(sys.stdin.readline())
+#
+# for _ in range(t):
+#     m, n, k = map(int, sys.stdin.readline().split())
+#     # 배추 위치쌍을 2차원 배열로 받기
+#     matrix = [[0] * m for _ in range(n)]
+#     # 흰지렁이수를 세기 위함
+#     count = 0
+#
+#     # 배추 위치에 1삽입
+#     for i in range(k):
+#         x, y = map(int, sys.stdin.readline().split())
+#         matrix[y][x] = 1
+#
+#     # 각 행과 열에서 값을 확인한다.
+#     # 그리고 dfs 함수가 모두 끝나면 흰지렁이 수를 계산한다.
+#     for i in range(m):
+#         for j in range(n):
+#             if matrix[j][i] == 1:
+#                 dfs(i, j)
+#                 count += 1
+#
+#     print(count)
+
+import sys
+from collections import deque
+
+def bfs(x, y):
+    deq = deque()
+    deq.append((x, y))
     # 상좌하우의 방향
     dx = [0, -1, 0, 1]
     dy = [1, 0, -1, 0]
-
-    # 방향 탐색
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if (0 <= nx < m) and (0 <= ny < n):
-            if matrix[ny][nx] == 1:
-                # 상하좌우에 값이 있으면 값을 0으로 변경한다.
-                matrix[ny][nx] = 0
-                dfs(nx, ny)
+    while deq:
+        x, y = deq.popleft()
+        # 방향 탐색
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if (0 <= nx < m) and (0 <= ny < n):
+                if matrix[ny][nx] == 1:
+                    deq.append((nx, ny))
+                    # 상하좌우에 값이 있으면 값을 0으로 변경한다.
+                    matrix[ny][nx] = 0
     return
+
 
 # 테스트 케이스
 t = int(sys.stdin.readline())
@@ -68,9 +116,7 @@ for _ in range(t):
     for i in range(m):
         for j in range(n):
             if matrix[j][i] == 1:
-                dfs(i, j)
+                bfs(i, j)
                 count += 1
 
     print(count)
-
-
