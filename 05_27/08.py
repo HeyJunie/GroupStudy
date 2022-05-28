@@ -4,7 +4,7 @@ def solution(s):
 
     for key, val in enumerate(s):
         if sH[val] == 1:
-            return  key+1
+            return key+1
     return -1
 
 
