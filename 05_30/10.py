@@ -1,24 +1,26 @@
 # 수열의 경우수
 
 def solution(nums):
-    answer=0
-    peaks=[]
-    n=len(nums)
+    answer = 0
+    peak = []
+    low = []
+    n = len(nums)
     for i in range(1, n-1):
-        if nums[i-1]<nums[i] and nums[i]>nums[i+1]:
-            peaks.append(i)
-    for pos in peaks:
-        lt=pos
-        rt=pos
-        lcnt=0
-        rcnt=0
-        while lt>=1 and nums[lt-1]<nums[lt]:
-            lcnt+=1
-            lt-=1
-        while rt<n-1 and nums[rt]>nums[rt+1]:
-            rcnt+=1
-            rt+=1
-        answer+=(lcnt*rcnt)
+        if nums[i-1] < nums[i] and nums[i+1] < nums[i]:
+            peak.append(i)
+
+    for x in peak:
+        left = x
+        right = x
+        lcnt = 0
+        rcnt = 0
+        while left >= 1 and nums[left+1] < nums[left]:
+            lcnt += 1
+            left -= 1
+        while right < n-1 and nums[right] > nums[right+1]:
+            rcnt += 1
+            right += 1
+        answer += (rcnt * lcnt)
     return answer
 
 print(solution([1, 3, 2, 5, 7, 4, 2, 5, 1]))#6
