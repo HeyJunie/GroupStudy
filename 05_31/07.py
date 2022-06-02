@@ -4,19 +4,22 @@ def solution(board):
     answer = "YES"
     n = len(board)
     for i in range(n):
-        width = []
-        height = []
+        width = set() # 중복이 아닌것을 찾아야 함
+        height = set()
         for j in range(n):
-            width.append(board[i][j])
-            height.append(board[j][i])
+            width.add(board[i][j])
+            height.add(board[j][i])
             if len(width) != 9 or len(height) != 9:
                 return "NO"
 
     for i in range(3):
-        by = []
         for j in range(3):
-            by.append(board)
-
+            by = set()
+            for k in range(3):
+                for l in range(3):
+                    by.add(board[i*3+k][j*3+l])
+            if len(by) != 9:
+                return "NO"
     return answer
 
 print(solution([

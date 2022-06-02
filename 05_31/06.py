@@ -1,7 +1,34 @@
 # 오목
 
 def solution(board):
-    answer = 1
+    answer = 0
+    dx = [-1, 0, 1, 1]
+    dy = [1, 1, 1, 0]
+    pan = [[0] * 21 for _ in range(21)] # 가장자리에 0을 넣어서 만약 값이 0이 나오면 멈출 수 있도록 하기 위함
+
+    for i in range(1, 20):
+        for j in range(1, 20):
+            pan[i][j] = board[i-1][j-1]
+    for i in range(1, 20):
+        for j in range(1, 20):
+            if pan[i][j] != 0:
+                for k in range(4):
+                    x = i
+                    y = j
+                    cnt = 1 # 돌의 갯수
+                    if pan[i-dx[k]][j-dy[k]] != pan[i][j]:
+                        while True:
+                            x += dx[k]
+                            y += dy[k]
+                            if pan[x][y] == pan[i][j]:
+                                cnt += 1
+                            else:
+                                break
+                    if cnt == 5:
+                        answer=pan[i][j]
+                        return answer
+    return answer
+
 
     return answer
 
