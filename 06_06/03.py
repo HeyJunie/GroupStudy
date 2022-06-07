@@ -1,11 +1,10 @@
 # 후위식 연산(postfix)
 # https://reakwon.tistory.com/62
 
-import re
 def solution(s):
     stack =[]
     for x in s:
-        if x in re.sub(r'[^0-9]', '', s):
+        if x.isdecimal(): # isdecimal()은 숫자를 뽑아내는 함수
             stack.append(int(x))
 
         if x == '+':
@@ -28,3 +27,4 @@ def solution(s):
     return stack[0]
 
 print(solution('352+*9-'))
+print(solution('532*+63/-'))

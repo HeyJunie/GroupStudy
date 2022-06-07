@@ -22,4 +22,16 @@ def solution(s):
 
     return ''.join(answer)
 
+def solution2(s):
+    stack = []
+    for x in s:
+        if x == ")":
+            while stack.pop() != "(": # 문자열을 계속 돈다.
+                continue # or pass
+        else :
+            stack.append(x)
+    return ''.join(stack)
+
+
 print(solution("(A(BC)D)EF(G(H)(IJ)K)LM(N)"))
+print(solution2("(A(BC)D)EF(G(H)(IJ)K)LM(N)"))

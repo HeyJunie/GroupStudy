@@ -1,15 +1,14 @@
 # 연속된 문자 지우기
 
 def solution(s):
-    answer = []
     stack = []
-
-    for i in range(len(s)):
-        stack.append(s[i])
-        if s[i] == s[i+1]:
+    for x in s:
+        if stack and stack[-1] == x: # stack이라고 적기만 해도 비어있는 상태를 나타냄
             stack.pop()
-    print(stack)
-    return answer
+        else:
+            stack.append(x)
+
+    return ''.join(stack)
 
 print(solution('acbbcaa'))
 print(solution('bacccaba'))
