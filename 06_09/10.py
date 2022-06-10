@@ -9,7 +9,7 @@ def solution(nums):
     while len(maxH) > 1:
         a = - heapq.heappop(maxH)
         b = - heapq.heappop(maxH)
-        if a != b :
+        if a != b:
             heapq.heappush(maxH, -(a-b))
     if len(maxH) > 0:
         answer = -heapq.heappop(maxH)
